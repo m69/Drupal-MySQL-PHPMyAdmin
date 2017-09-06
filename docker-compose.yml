@@ -16,13 +16,17 @@ services:
      #- ./sites:/var/www/html/sites
     restart: always
 
-  db:
+  mysql:
     image: mysql
+    restart: always 
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
     volumes:
-      - ./db:/var/lib/mysql
+      - ./db:/var/lib/mysql/
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
       - 8090:80
+    environment:  
+      PMA_HOST: mysql  
